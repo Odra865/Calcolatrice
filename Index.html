@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gioco di Carte</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #FFF;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        #card {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #333;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            font-size: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #444;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="card">Tocca il bottone per iniziare il gioco</div>
+    <button onclick="drawCard()">Prossima Carta</button>
+
+    <script>
+        const deck = [
+            {
+                obbligoLui: "Fai eccitare lei senza toccarla, se non ci riesci bevi uno shot",
+                obbligoLei: "Fai eccitare lui senza toccarlo, se non ci riesci bevi uno shot",
+                veritaLui: "Con quante ragazze sei stato a letto? Se più di 3 bevi uno shot",
+                veritaLei: "Hai mai avuto una ragazza che squirtava? Se sì, bevi uno shot"
+            },
+            // Aggiungi altre carte qui
+        ];
+
+        function drawCard() {
+            const card = deck[Math.floor(Math.random() * deck.length)];
+            document.getElementById("card").innerHTML = `
+                <p><strong>Obbligo per Lui:</strong> ${card.obbligoLui}</p>
+                <p><strong>Obbligo per Lei:</strong> ${card.obbligoLei}</p>
+                <p><strong>Verità per Lui:</strong> ${card.veritaLui}</p>
+                <p><strong>Verità per Lei:</strong> ${card.veritaLei}</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>
