@@ -3,65 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gioco di Carte</title>
+    <title>Dirty Desire</title>
     <style>
         body {
-            background-color: #111;
-            color: #FFF;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
+            background-color: #520000; /* Sfondo rosso scuro */
+            font-family: 'Arial', sans-serif; /* Scegli un font che somigli a quello dell'immagine */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        #card {
-            background-color: #222;
-            padding: 20px;
+
+        #deck {
+            width: 300px;
+            height: 450px;
+            background-color: black;
             border-radius: 10px;
-            box-shadow: 0 0 10px #333;
-            margin: 20px auto;
-            width: 80%;
-            max-width: 600px;
-            font-size: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #444;
-            color: #FFF;
-            border: none;
-            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
             cursor: pointer;
-            font-size: 18px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
-        button:hover {
-            background-color: #555;
+
+        #deck h1 {
+            color: red;
+            font-size: 36px;
+            text-align: center;
+            font-family: 'Arial', sans-serif; /* Usa un font simile a quello dell'immagine */
+            position: absolute;
+            top: 20%;
+        }
+
+        #card {
+            width: 300px;
+            height: 450px;
+            background-color: white;
+            display: none;
+            flex-direction: column;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Sezioni della carta */
+        .half {
+            width: 100%;
+            height: 50%;
+            display: flex;
+        }
+
+        .half .section {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        /* Colori per R (LUI) e M (LEI) */
+        .truthR { background-color: #0C5283; color: white; }
+        .dareR { background-color: #0C5283; color: white; }
+        .truthM { background-color: #FF1915; color: black; }
+        .dareM { background-color: #FF1915; color: black; }
+
+        /* Per la grafica della carta */
+        #card-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 5px solid black;
+            border-radius: 10px;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
+    <!-- Mazzo di carte -->
+    <div id="deck">
+        <h1>DIRTY DESIRE</h1>
+    </div>
 
-    <div id="card">Tocca il bottone per iniziare il gioco</div>
-    <button onclick="drawCard()">Prossima Carta</button>
+    <!-- Carta -->
+    <div id="card">
+        <div class="half">
+            <div class="section truthR">Verità per R</div>
+            <div class="section truthM">Verità per M</div>
+        </div>
+        <div class="half">
+            <div class="section dareR">Obbligo per R</div>
+            <div class="section dareM">Obbligo per M</div>
+        </div>
+        <div id="card-border"></div>
+    </div>
 
     <script>
-        const deck = [
+        const deck = document.getElementById('deck');
+        const card = document.getElementById('card');
+
+        const truthR = document.querySelector('.truthR');
+        const truthM = document.querySelector('.truthM');
+        const dareR = document.querySelector('.dareR');
+        const dareM = document.querySelector('.dareM');
+
+        const cards = [
             {
-                obbligoLui: "Fai eccitare lei senza toccarla, se non ci riesci bevi uno shot",
-                obbligoLei: "Fai eccitare lui senza toccarlo, se non ci riesci bevi uno shot",
-                veritaLui: "Con quante ragazze sei stato a letto? Se più di 3 bevi uno shot",
-                veritaLei: "Hai mai avuto una ragazza che squirtava? Se sì, bevi uno shot"
+                truthR: "Con quante ragazze sei stato a letto? Se sono più di 3 bevi uno shot.",
+                truthM: "Hai mai finto un orgasmo? Se sì, bevi uno shot.",
+                dareR: "Spoglia completamente lei usando solo la bocca, altrimenti bevi uno shot.",
+                dareM: "Fai eccitare lui senza toccarlo, se non ci riesci in 4 minuti bevi uno shot."
             },
-            // Aggiungi altre carte qui
+            {
+                truthR: "Hai mai pensato a qualcun'altra mentre facevi sesso con lei? Se sì, bevi uno shot.",
+                truthM: "Qual è la tua fantasia più nascosta? Condividila o bevi uno shot.",
+                dareR: "Baciala in ogni parte del corpo che ti indica, altrimenti bevi uno shot.",
+                dareM: "Fagli un massaggio sensuale per 5 minuti. Se lui si eccita, bevi uno shot."
+            }
+            // Puoi aggiungere altre carte qui con la stessa struttura
         ];
 
-        function drawCard() {
-            const card = deck[Math.floor(Math.random() * deck.length)];
-            document.getElementById("card").innerHTML = `
-                <p><strong>Obbligo per Lui:</strong> ${card.obbligoLui}</p>
-                <p><strong>Obbligo per Lei:</strong> ${card.obbligoLei}</p>
-                <p><strong>Verità per Lui:</strong> ${card.veritaLui}</p>
-                <p><strong>Verità per Lei:</strong> ${card.veritaLei}</p>
-            `;
-        }
-    </script>
+        let currentIndex = 0;
 
+        deck.addEventListener('click', function() {
+            if (currentIndex < cards.length) {
+                const currentCard = cards[currentIndex];
+                truthR.textContent = currentCard.truthR;
+                truthM.textContent = currentCard.truthM;
+                dareR.textContent = currentCard.dareR;
+                dareM.textContent = currentCard.dareM;
+
+                card.style.display = 'flex';  // Mostra la carta
+                deck.style.display = 'none';  // Nasconde il mazzo
+            }
+        });
+
+        card.addEventListener('click', function() {
+            currentIndex++;
+            if (currentIndex >= cards.length) {
+                currentIndex = 0;  // Ricomincia dal primo
+            }
+
+            card.style.display = 'none';  // Nasconde la carta
+            deck.style.display = 'flex';  // Mostra di nuovo il mazzo
+        });
+    </script>
 </body>
 </html>
