@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dirty Desire</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Showcard+Gothic&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap');
 
         body {
             background-color: #520000; /* Sfondo rosso scuro */
-            font-family: 'Arial', sans-serif;
+            font-family: 'ADLaM Display', sans-serif; /* Cambiato il font */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -34,32 +34,21 @@
         #deck h1 {
             color: red;
             font-size: 48px;
-            font-family: 'Showcard Gothic', sans-serif;
+            font-family: 'ADLaM Display', sans-serif; /* Cambiato font */
             position: absolute;
             top: 15%;
         }
 
         #mouth {
-            width: 100px;
-            height: 60px;
-            background-color: red;
+            width: 150px;
+            height: 100px;
+            background-image: url('https://example.com/mouth.png'); /* URL dell'immagine della bocca più realistica */
+            background-size: cover;
             position: absolute;
             bottom: 15%;
-            border-radius: 50% 50% 40% 40%;
-            border: 3px solid red;
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        #mouth:before {
-            content: "";
-            width: 50%;
-            height: 20%;
-            border-radius: 0 0 100px 100px;
-            background-color: black;
-            position: absolute;
-            top: -5%;
         }
 
         /* Carta da gioco */
@@ -73,6 +62,7 @@
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
             padding: 10px;
+            font-family: 'ADLaM Display', sans-serif; /* Font aggiornato */
         }
 
         /* Sezioni della carta */
@@ -91,7 +81,7 @@
             font-size: 20px;
             text-align: center;
             border: 1px solid black;
-            font-family: 'Showcard Gothic', sans-serif;
+            font-family: 'ADLaM Display', sans-serif; /* Font aggiornato */
             padding: 20px;
             box-sizing: border-box;
         }
@@ -106,7 +96,7 @@
         .letter {
             position: absolute;
             font-size: 36px;
-            font-family: 'Showcard Gothic', sans-serif;
+            font-family: 'ADLaM Display', sans-serif; /* Font aggiornato */
         }
         
         .letter-R {
@@ -125,7 +115,7 @@
         #truth-title, #dare-title {
             position: absolute;
             font-size: 28px;
-            font-family: 'Showcard Gothic', sans-serif;
+            font-family: 'ADLaM Display', sans-serif; /* Font aggiornato */
             color: black;
             -webkit-text-stroke: 1px white;
         }
